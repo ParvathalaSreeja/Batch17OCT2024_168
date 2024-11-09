@@ -1,0 +1,139 @@
+#include <stdio.h>
+#include <string.h>
+#include<stdlib.h>
+struct Employee
+{
+	char eName[20];
+	char eGender;
+	char eAddress[20];
+	int eId;
+	float eSal;
+	char eLname[20];
+
+};
+
+typedef struct Employee EMP;
+
+
+void getDetails(EMP [],int);
+void dispDetails(EMP [], int);
+int searchId(EMP e[],int n,int id);
+void printId(EMP e[],int n,int id);
+int lastName(EMP e[],int n,char name[20]);
+
+int main()
+{
+
+	EMP e1;
+	EMP e[3];
+	int i;
+	int id;
+    getDetails(e,3);
+	dispDetails(e,3);
+    printf("\nenter the id:");
+    scanf("%d",&id);
+    printId(e,3,id);
+    char name[20];
+    printf("\nEnter the last name:");
+    scanf("%s",name);
+    lastName(e,3,name);
+	printf("\n\n");
+	return 0;
+
+}
+
+void getDetails(EMP e[], int n)
+{
+	int i;
+
+	printf("\nEnter Employee Details\n");
+	for(i=0;i<n;i++)
+	{
+		printf("\nName: ");
+		scanf("%s",e[i].eName);
+		printf("\nID: ");
+		scanf("%d",&e[i].eId);
+		printf("\nGender: ");
+		scanf(" ");
+		scanf("%c",&e[i].eGender);
+		printf("\nAddress: ");
+		scanf("%s",e[i].eAddress);
+		printf("\nSalary: ");
+		scanf("%f",&e[i].eSal);
+		printf("\nLastName:");
+		scanf("%s",&e[i].eLname);
+
+	}
+}
+
+void dispDetails(EMP e[], int n)
+{
+	int i;
+	printf("\nEmployee Details are\n");
+	for(i=0;i<n;i++){
+		printf("\n=========================\n");
+		printf("\nID: %d",e[i].eId);
+		printf("\nName: %s",e[i].eName);
+		printf("\nGender: %c",e[i].eGender);
+		printf("\nAddress: %s",e[i].eAddress);
+		printf("\nSalary: %f",e[i].eSal);
+		printf("\nLastName:%s",e[i].eLname);
+		printf("\n=========================\n");
+	}
+}
+int searchId(EMP e[],int n,int id)
+{
+    for(int i=0;i<n;i++)
+    {
+        if(e[i].eId==id)
+              return i;
+    }
+    return -1;
+}
+void printId(EMP e[],int n,int id)
+{
+    int search= searchId(e,n,id);
+    if(search!=1)
+    {   
+          printf("Employee details:\n");
+          printf("ID:%d\n",e[search].eId);
+          printf("NAME:%s\n",e[search].eName);
+          printf("GENDER:%c\n",e[search].eGender);
+          printf("SALARY:%f\n",e[search].eSal);
+    }
+    else
+        printf("ID not found");
+
+}
+
+int lastName(EMP e[],int n,char name[20])
+{
+    int found;
+    for(int i=0;i<n;i++)
+    {
+        if(strcmp(e[i].eLname,name)==0)
+        {
+            printf("%d\n",e[i].eId);
+            printf("%s\n",e[i].eName);
+            printf("%c\n",e[i].eGender);
+            printf("%f\n",e[i].eSal);
+            found=1;
+        }
+    }
+    if(found!=1)
+            printf("\nNot found");
+}
+/*
+void salaryS(EMP e[],int n,int m)
+{
+    if(e[i].eSal>=n && e[i].eSal<=m)
+    {
+        printf("%d",e[i].eId);
+        printf("%s",e[i].eName);
+        printf("%c",e[i].eGender);
+        printf("%f",e[i].eSal);
+    }
+    else
+        printf("Salary not found");
+}
+*/
